@@ -94,10 +94,12 @@ pcl::gpu::extractEuclideanClusters (const pcl::PointCloud<pcl::PointXYZ>::Ptr  &
     pcl::gpu::NeighborIndices result_device;
 
     // once the area stop growing, stop also iterating.
+    std::vector<int> sizes, data;
+    sizes.reserve(host_cloud_->size());
+    data.reserve(host_cloud_->size());
     do
     {
       // Host buffer for results
-      std::vector<int> sizes, data;
 
       // if the number of queries is not high enough implement search on Host here
       if(queries_host.size () <= 10) ///@todo: adjust this to a variable number settable with method
